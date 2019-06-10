@@ -5,6 +5,8 @@
 
 package com.kristinsmith.wd_webdriver;
 
+import java.util.List;
+import java.util.Set;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
@@ -27,11 +29,34 @@ public class Main {
         searchbox.sendKeys("Little Saigon" + Keys.ENTER);
         
         //Click on the First article in the list
+        By post = By.className("post_box");
+        List<WebElement> posts = driver.findElements(post);
+        WebElement toppost = posts.get(0);
+        toppost.click();
         
-        //Hit the Donate button
+        //Hit the Donate button. Switch focus to Network for Good Screen and check for submit button using xpath
+        By button = By.xpath("//a[@href='https://walkdenver.networkforgood.com/projects/21200-support-our-mission']");
+        WebElement donatebutton= driver.findElement(button);
+        donatebutton.click();
         
-        //Switch focus to Network for Good Screen and check for submit button using xpath
         
+        //Working on validating text in new window
+        /*String parentWindow = driver.getWindowHandle();
+        Set<String> handles =  driver.getWindowHandles();
+        for(String windowHandle  : handles)
+            {
+            if(!windowHandle.equals(parentWindow))
+               {
+                    driver.switchTo().window(windowHandle);//Script fails here. Add in an explicit wait to make sure the second window is loaded before text search
+                    WebElement title = driver.findElement(By.xpath("//h1[contains(text(),'streets for people')]"));
+                    if ( title != null){
+                        System.out.println("Verified donation button takes user to Network for Good");
+                    } else {
+                        System.out.println("Donation form not found - investigate");
+                    }
+               }
+            }*/
+
         //Close the browser
         driver.quit();
     }
