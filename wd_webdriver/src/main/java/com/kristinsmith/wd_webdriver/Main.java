@@ -40,14 +40,15 @@ public class Main {
         donatebutton.click();
         
         
-        //Working on validating text in new window
-        /*String parentWindow = driver.getWindowHandle();
+        //validating text in new window
+        String parentWindow = driver.getWindowHandle();
         Set<String> handles =  driver.getWindowHandles();
         for(String windowHandle  : handles)
             {
             if(!windowHandle.equals(parentWindow))
                {
-                    driver.switchTo().window(windowHandle);//Script fails here. Add in an explicit wait to make sure the second window is loaded before text search
+                    WebDriverWait wait = new WebDriverWait(driver, 5);
+                    driver.switchTo().window(windowHandle);
                     WebElement title = driver.findElement(By.xpath("//h1[contains(text(),'streets for people')]"));
                     if ( title != null){
                         System.out.println("Verified donation button takes user to Network for Good");
@@ -55,7 +56,7 @@ public class Main {
                         System.out.println("Donation form not found - investigate");
                     }
                }
-            }*/
+            }
 
         //Close the browser
         driver.quit();
